@@ -22,6 +22,9 @@ import {
 } from "@mui/material";
 import { Search, CloudUpload } from "@mui/icons-material";
 import "./ItemMaster.css";
+import { useDispatch } from "react-redux";
+import { addItem } from "../redux/action";
+
 
 const ItemMaster = () => {
   //states codes.......................................................................................................................................
@@ -42,6 +45,7 @@ const ItemMaster = () => {
   const [categoryError, setCategoryError] = useState("");
   //.......................................................................................................................................................
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const supplierList = ["Supplier 1", "Supplier 2", "Supplier 3"];
   //ItemId Generator.............................................................................................................................................
   function generateItemId() {
@@ -51,12 +55,11 @@ const ItemMaster = () => {
   }
   useEffect(() => {
     const newItemId = generateItemId();
-    console.log(newItemId);
     setItemNo(newItemId);
   }, []);
   //validations...........................................................................................................................................
   const validateItemName = () => {
-    const re = /^[A-Za-z\s]{1,30}$/;
+    const re = /^[A-Za-z0-9\s]{1,30}$/;
     if (!re.test(itemName)) {
       setItemNameError("please enter a valid item name");
     } else {
@@ -64,7 +67,7 @@ const ItemMaster = () => {
     }
   };
   const validateInventoryLocation = () => {
-    const re = /^[A-Za-z\s]{1,30}$/;
+    const re = /^[A-Za-z0-9\s]{1,30}$/;
     if (!re.test(inventoryLocation)) {
       setInventoryLocationError("please enter a valid location");
     } else {
@@ -72,7 +75,7 @@ const ItemMaster = () => {
     }
   };
   const validateBrand = () => {
-    const re = /^[A-Za-z\s]{1,40}$/;
+    const re = /^[A-Za-z0-9\s]{1,30}$/;
     if (!re.test(brand)) {
       setBrandError("please enter a valid brand");
     } else {
@@ -80,7 +83,7 @@ const ItemMaster = () => {
     }
   };
   const validateCategory = () => {
-    const re = /^[A-Za-z\s]{1,40}$/;
+    const re = /^[A-Za-z0-9\s]{1,30}$/;
     if (!re.test(category)) {
       setCategoryError("please enter a valid category");
     } else {
@@ -116,8 +119,33 @@ const ItemMaster = () => {
   //submit function
   const handleSubmit = (e) => {
     e.preventDefault();
-    const data = [itemName, inventoryLocation, brand, category, supplier, stockUnit, unitPrice]
-    navigate("/itemmaster_table", { state: { data } });
+    let data = [
+      // ...items,
+      {
+        itemNo: itemNo,
+        itemName: itemName,
+        inventoryLocation: inventoryLocation,
+        brand: brand,
+        category: category,
+        supplier: supplier,
+        stockUnit: stockUnit,
+        unitPrice: unitPrice,
+      },
+    ];
+    dispatch(addItem(data));
+    setItemName("");
+    setInventoryLocation("");
+    setBrand("");
+    setCategory("");
+    setSupplier("");
+    setStockUnit("");
+    setUnitPrice("");
+    const newItemId = generateItemId();
+    setItemNo(newItemId);
+  };
+  //navigation to item table
+  const handleTable = () => {
+    navigate("/itemtable");
   };
   //dialog open && close function
   const handleDialogOpen = () => setOpenDialog(true);
@@ -127,16 +155,17 @@ const ItemMaster = () => {
     setSupplier(supplierName);
     handleDialogClose();
   };
+
   return (
     <Box sx={{ padding: 2 }}>
       <Box sx={{ display: "flex", justifyContent: "flex-end", mb: 2 }}>
-        <button className="tableButton">
+        <button className="tableButton" onClick={handleTable}>
           {" "}
-          <span>Button</span>
+          <span>Item List</span>
         </button>
       </Box>
       <Typography variant="h5" gutterBottom>
-        Item Master Form
+        ITEM MASTER
       </Typography>
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
@@ -316,6 +345,7 @@ const ItemMaster = () => {
               variant="contained"
               sx={{ backgroundColor: "black", color: "white" }}
               fullWidth
+              onClick={handleSubmit}
               disabled={
                 itemNameError ||
                 categoryError ||

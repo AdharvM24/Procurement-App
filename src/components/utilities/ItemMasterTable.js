@@ -7,7 +7,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
     backgroundColor: theme.palette.common.black,
@@ -27,44 +27,40 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 export default function ItemMasterTable() {
-  const location = useLocation();
-  const data = location.state.data;
-  console.log("data...d", data);
+  const dataItems = useSelector((state) => state.items?.items);
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 700 }} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Dessert (100g serving)</StyledTableCell>
-            <StyledTableCell align="right">Calories</StyledTableCell>
-            <StyledTableCell align="right">Fat&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Carbs&nbsp;(g)</StyledTableCell>
-            <StyledTableCell align="right">Protein&nbsp;(g)</StyledTableCell>
+            <StyledTableCell>Item No</StyledTableCell>
+            <StyledTableCell align="right">Item Name</StyledTableCell>
+            <StyledTableCell align="right">Inventory Location</StyledTableCell>
+            <StyledTableCell align="right">Brand</StyledTableCell>
+            <StyledTableCell align="right">Category</StyledTableCell>
+            <StyledTableCell align="right">Supplier</StyledTableCell>
+            <StyledTableCell align="right">Stock Unit</StyledTableCell>
+            <StyledTableCell align="right">Unit Price</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {dataItems?.flat().map((row) => (
+            <StyledTableRow key={row.itemNo}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {row.itemNo}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.calories}</StyledTableCell>
-              <StyledTableCell align="right">{row.fat}</StyledTableCell>
-              <StyledTableCell align="right">{row.carbs}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell>
+              <StyledTableCell component="th" scope="row">
+                {row.itemName}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {row.inventoryLocation}
+              </StyledTableCell>
+              <StyledTableCell align="right">{row.brand}</StyledTableCell>
+              <StyledTableCell align="right">{row.category}</StyledTableCell>
+              <StyledTableCell align="right">{row.supplier}</StyledTableCell>
+              <StyledTableCell align="right">{row.stockUnit}</StyledTableCell>
+              <StyledTableCell align="right">{row.unitPrice}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

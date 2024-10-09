@@ -1,15 +1,14 @@
-import React from 'react';
-import { CssBaseline } from '@mui/material';
-import SideMenu from './SideMenu'; // Adjust the path as needed
-
+import React from "react";
+import { CssBaseline } from "@mui/material";
+import MainRoute from "./routes/MainRoutes";
+import { Provider } from "react-redux";
+import store from "./redux/store";
 const App = () => {
-  return (
-    <>
+  return(
+    <Provider store={store}>
       <CssBaseline />
-      <SideMenu />
-      {/* Other components go here */}
-    </>
+      <MainRoute />
+    </Provider>
   );
 };
-
 export default App;
