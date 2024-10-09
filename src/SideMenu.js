@@ -18,13 +18,10 @@ import PetsIcon from "@mui/icons-material/Pets";
 import DescriptionIcon from "@mui/icons-material/Description";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useMediaQuery } from "@mui/material";
-
+import ItemMaster from "./components/ItemMasterr";
+import ItemMasterTable from "./components/utilities/ItemMasterTable";
 // Home Page Component
-const Home = () => (
-  <Typography variant="h4" color="#00bcd4">
-    Home Page
-  </Typography>
-);
+const Home = () => <ItemMaster />;
 // Cats Page Component
 const Cats = () => (
   <Typography variant="h4" color="#00bcd4">
@@ -44,9 +41,9 @@ const SideMenu = () => {
   const drawerWidth = 240;
 
   const menuItems = [
-    { text: "HOME", icon: <HomeIcon />, path: "/" },
-    { text: "CATS", icon: <PetsIcon />, path: "/cats" },
-    { text: "DOGS", icon: <DescriptionIcon />, path: "/dogs" },
+    { text: "ITEM MASTER", icon: <HomeIcon />, path: "/" },
+    // { text: "CATS", icon: <PetsIcon />, path: "/cats" },
+    // { text: "DOGS", icon: <DescriptionIcon />, path: "/dogs" },
   ];
 
   const handleDrawerToggle = () => {
@@ -57,13 +54,13 @@ const SideMenu = () => {
     <Box
       sx={{
         width: drawerWidth,
-        backgroundColor: "#212121",
+        backgroundColor: "#000000",
         color: "#00bcd4",
         height: "100%",
       }}
     >
       <Box sx={{ padding: "16px" }}>
-        <Typography variant="h5" color="#00bcd4">
+        <Typography variant="h5" color="#ffff">
           HOME PAGE
         </Typography>
       </Box>
@@ -76,8 +73,8 @@ const SideMenu = () => {
             to={item.path}
             onClick={handleDrawerToggle}
           >
-            <ListItemIcon sx={{ color: "#00bcd4" }}>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.text} sx={{ color: "#00bcd4" }} />
+            <ListItemIcon sx={{ color: "#ffff" }}>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.text} sx={{ color: "#ffff" }} />
           </ListItem>
         ))}
       </List>
@@ -91,7 +88,7 @@ const SideMenu = () => {
         <AppBar
           position="fixed"
           sx={{
-            backgroundColor: "#212121",
+            backgroundColor: "#000000",
             zIndex: (theme) => theme.zIndex.drawer + 1,
           }}
         >
@@ -110,9 +107,9 @@ const SideMenu = () => {
               variant="h6"
               noWrap
               component="div"
-              sx={{ color: "#00bcd4" }}
+              sx={{ color: "#ffff" }}
             >
-              Navigation Menu
+              Procurement App
             </Typography>
           </Toolbar>
         </AppBar>
@@ -157,12 +154,13 @@ const SideMenu = () => {
 
         <Box
           component="main"
-          sx={{ flexGrow: 1, bgcolor: "#303030", p: 3, marginTop: "64px" }}
+          sx={{ flexGrow: 1, bgcolor: "#ffff", p: 6, marginTop: "64px" }}
         >
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cats" element={<Cats />} />
             <Route path="/dogs" element={<Dogs />} />
+            <Route path="/itemmaster_table" element={<ItemMasterTable />} />
           </Routes>
         </Box>
       </Box>
