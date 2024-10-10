@@ -44,7 +44,7 @@ A small procurement application built with React.js, featuring Item Master and P
 ## Screenshots
 
 ### Item Master Module
-![Item Master Module](/public/images/Item master.png)
+![Item Master Module](/public/images/Itemmaster.png)
 
 ### Purchase Order Module
 ![Purchase Order Module](/public/images/purchase.png)
