@@ -1,6 +1,6 @@
 # Procurement Application
 
-![Procurement App Logo](/api/placeholder/200/100)
+
 
 A small procurement application built with React.js, featuring Item Master and Purchase Order modules.
 
@@ -44,10 +44,10 @@ A small procurement application built with React.js, featuring Item Master and P
 ## Screenshots
 
 ### Item Master Module
-![Item Master Module](/api/placeholder/800/400)
+![Item Master Module](/public/images/Item master.png)
 
 ### Purchase Order Module
-![Purchase Order Module](/api/placeholder/800/400)
+![Purchase Order Module](/public/images/purchase.png)
 
 ## Installation
 
