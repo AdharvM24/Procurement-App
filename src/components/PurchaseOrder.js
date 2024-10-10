@@ -22,8 +22,6 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useSelector } from "react-redux";
 
-
-
 const suppliers = ["Supplier 1", "Supplier 2", "Supplier 3"];
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -36,11 +34,15 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
-  "&:nth-of-type(odd)": {
+  '&:nth-of-type(odd)': {
     backgroundColor: theme.palette.action.hover,
   },
-  "&:last-child td, &:last-child th": {
+  '&:last-child td, &:last-child th': {
     border: 0,
+  },
+  '&:hover': {
+    backgroundColor: theme.palette.action.selected,
+    cursor: 'pointer',
   },
 }));
 
@@ -230,32 +232,42 @@ const PurchaseOrder = () => {
           <TextField
             label="Search with Item name"
             value={itemSearch}
-            sx={{ mt: 2 }}
+            sx={{ mt: 2, mb: 2 }}
             onChange={(e) => setItemSearch(e.target.value)}
             fullWidth
           />
-          <Table>
-            <TableBody>
-              {items
-                ?.flat()
-                .filter((item) =>
-                  item?.itemName
-                    ?.toLowerCase()
-                    .includes(itemSearch?.toLowerCase())
-                )
-                .map((item) => (
-                  <TableRow
-                    key={item.itemNo}
-                    onClick={() => handleAddItem(item)}
-                  >
-                    <TableCell>{item.itemNo}</TableCell>
-                    <TableCell>{item.itemName}</TableCell>
-                    <TableCell>{item.stockUnit}</TableCell>
-                    <TableCell>{item.unitPrice}</TableCell>
-                  </TableRow>
-                ))}
-            </TableBody>
-          </Table>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Item No</StyledTableCell>
+                  <StyledTableCell>Item Name</StyledTableCell>
+                  <StyledTableCell>Stock Unit</StyledTableCell>
+                  <StyledTableCell>Unit Price</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {items
+                  ?.flat()
+                  .filter((item) =>
+                    item?.itemName
+                      ?.toLowerCase()
+                      .includes(itemSearch?.toLowerCase())
+                  )
+                  .map((item) => (
+                    <StyledTableRow
+                      key={item.itemNo}
+                      onClick={() => handleAddItem(item)}
+                    >
+                      <StyledTableCell>{item.itemNo}</StyledTableCell>
+                      <StyledTableCell>{item.itemName}</StyledTableCell>
+                      <StyledTableCell>{item.stockUnit}</StyledTableCell>
+                      <StyledTableCell>{item.unitPrice}</StyledTableCell>
+                    </StyledTableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
         </DialogContent>
         <DialogActions>
           <Button
