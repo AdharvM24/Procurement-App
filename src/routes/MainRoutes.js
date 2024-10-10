@@ -16,11 +16,6 @@ import ItemMasterTable from "../components/utilities/ItemMasterTable";
 
 const Home = () => <ItemMaster />;
 const Purchase = () => <PurchaseOrder />;
-// const Dogs = () => (
-//   <Typography variant="h4" color="#00bcd4">
-//     Dogs Page
-//   </Typography>
-// );
 
 const MainRoute = () => {
   const [open, setOpen] = useState(true);
