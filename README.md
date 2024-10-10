@@ -55,7 +55,7 @@ A small procurement application built with React.js, featuring Item Master and P
    ```
    git clone https://github.com/yourusername/procurement-app.git
    ```
-
+   
 2. Navigate to the project directory:
    ```
    cd procurement-app
