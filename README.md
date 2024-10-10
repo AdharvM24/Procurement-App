@@ -53,12 +53,12 @@ A small procurement application built with React.js, featuring Item Master and P
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/procurement-app.git
+   git clone https://github.com/AdharvM24/Procurement-App.git
    ```
    
 2. Navigate to the project directory:
    ```
-   cd procurement-app
+   cd Procurement-app
    ```
 
 3. Install dependencies:
