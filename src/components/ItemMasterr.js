@@ -24,7 +24,7 @@ import { Search, CloudUpload } from "@mui/icons-material";
 import "./ItemMaster.css";
 import { useDispatch } from "react-redux";
 import { addItem } from "../redux/action";
-
+import Tooltip from "@mui/material/Tooltip";
 
 const ItemMaster = () => {
   //states codes.......................................................................................................................................
@@ -110,6 +110,11 @@ const ItemMaster = () => {
     let categorys = e.target.value.replace(/[^a-zA-Z0-9\s]/g, "");
     categorys = categorys.slice(0, 40);
     setCategory(categorys);
+  };
+  const handlePriceChange = (e) => {
+    let price = e.target.value.replace(/[^\d.]/g, "");
+    price = price.slice(0, 6);
+    setUnitPrice(price);
   };
   //image handler
   const handleImageUpload = (e) => {
@@ -294,7 +299,7 @@ const ItemMaster = () => {
             <TextField
               label="Unit Price"
               value={unitPrice}
-              onChange={(e) => setUnitPrice(e.target.value)}
+              onChange={handlePriceChange}
               fullWidth
               required
             />
@@ -302,15 +307,22 @@ const ItemMaster = () => {
 
           {/* Item Images */}
           <Grid item xs={12}>
-            <Button
-              variant="contained"
-              component="label"
-              startIcon={<CloudUpload />}
-              sx={{ backgroundColor: "black", color: "white" }}
-            >
-              Upload Images
-              <input type="file" hidden multiple onChange={handleImageUpload} />
-            </Button>
+            <Tooltip title="Image must be in JPG, PNG, or JPEG format" arrow>
+              <Button
+                variant="contained"
+                component="label"
+                startIcon={<CloudUpload />}
+                sx={{ backgroundColor: "black", color: "white" }}
+              >
+                Upload Images
+                <input
+                  type="file"
+                  hidden
+                  multiple
+                  onChange={handleImageUpload}
+                />
+              </Button>
+            </Tooltip>
             {images.length > 0 && (
               <Typography variant="body2">
                 {images.length} image(s) uploaded
